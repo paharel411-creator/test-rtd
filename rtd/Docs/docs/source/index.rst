@@ -1,13 +1,13 @@
-docs/
-├── index.rst
-├── overview.rst
-├── installation.rst
-├── running.rst
-├── backend.rst
-├── frontend.rst
-├── database.rst
-├── external_api.rst
-├── testing.rst
-├── changelog.rst
-├── code_documentation.rst
-└── conf.py
+Welcome to the Football App
+===========================
+
+This app tracks live scores and match results.
+
+Latest Scores
+-------------
+
+* **Real Madrid** 2 - 1 **Barcelona**
+* **Man City** 3 - 0 **Liverpool**
+
+.. note::
+   Scores are updated every 15 minutes.
