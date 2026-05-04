@@ -17,10 +17,23 @@ This README is written as a GitHub-friendly documentation page. It is meant to h
 Contents
 --------
 
-.. contents::
-   :local:
-   :depth: 2
-
+* Requirements
+* Installation
+* Running the app
+* Version control
+* Definitions
+* Requirement 1: Manage user accounts
+* Requirement 2: Manage favourites
+* Requirement 3: Show a personalised home screen
+* Requirement 4: Show live matches fixtures and results
+* Requirement 5: Show league standings
+* Requirement 6: Show team and player statistics
+* Requirement 7: Search and compare football data
+* Requirement 8: Manage profile and notification settings
+* Architecture and data flow
+* Code map
+* Testing
+* Common problems
 
 Requirements
 ------------
@@ -68,7 +81,6 @@ Default database values in ``config.py``:
 * user: ``postgres``
 * port: ``5432``
 
-
 Installation
 ------------
 
@@ -79,14 +91,12 @@ Installation
 
    cd C:\path\to\primescore
 
-
 2. Create a virtual environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: powershell
 
    py -m venv .venv
-
 
 3. Activate the virtual environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,14 +105,12 @@ Installation
 
    .\.venv\Scripts\Activate.ps1
 
-
 4. Install dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: powershell
 
    pip install -r requirements.txt
-
 
 5. Create the PostgreSQL database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -111,14 +119,12 @@ Installation
 
    psql -U postgres -c "CREATE DATABASE primescore;"
 
-
 6. Load the schema
 ~~~~~~~~~~~~~~~~~~
 
 .. code-block:: powershell
 
    psql -U postgres -d primescore -f db\schema.sql
-
 
 7. Set environment variables for the current PowerShell session
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -131,7 +137,6 @@ Installation
    $env:DB_USER="postgres"
    $env:DB_PASSWORD="YOUR_POSTGRES_PASSWORD"
    $env:DB_PORT="5432"
-
 
 Running the app
 ---------------
@@ -152,7 +157,6 @@ The app runs on port ``5000`` because ``app.py`` explicitly starts Flask with:
 .. code-block:: python
 
    app.run(host="0.0.0.0", port=5000, debug=debug_mode)
-
 
 Version control
 ---------------
@@ -180,7 +184,6 @@ Typical commands:
    git commit -m "Add favourites route tests and update matrix"
    git push origin feature/short-description
 
-
 Definitions
 -----------
 
@@ -195,24 +198,20 @@ A PrimeScore account stores:
 * optional display name
 * optional bio
 
-
 B. Favourite team
 ~~~~~~~~~~~~~~~~~
 
 A favourite team is a club selected by the user so the app can show team-focused fixtures, results, live matches, and comparisons.
-
 
 C. Favourite player
 ~~~~~~~~~~~~~~~~~~~
 
 A favourite player is a player selected by the user so the app can show player cards and player statistics on the home screen and in comparison tools.
 
-
 D. Favourite league
 ~~~~~~~~~~~~~~~~~~~
 
 A favourite league is a saved competition such as the Premier League, Serie A, or La Liga. Favourite leagues drive the league-table section and can also be cycled on the home page.
-
 
 E. Match
 ~~~~~~~~
@@ -222,7 +221,6 @@ A match is a fixture returned by API-Football. Depending on status, it may be:
 * live
 * not started
 * finished
-
 
 F. Statistics
 ~~~~~~~~~~~~~
@@ -236,7 +234,6 @@ Statistics are football-specific values returned by API-Football or derived from
 * draws
 * losses
 * clean sheets
-
 
 Requirement 1: Manage user accounts
 -----------------------------------
@@ -264,7 +261,6 @@ Main code:
 * ``templates/pages/login_page.html``
 * ``static/js/auth_handlers.js``
 
-
 Requirement 2: Manage favourites
 --------------------------------
 
@@ -290,7 +286,6 @@ Main code:
 * ``templates/pages/favourites_page.html``
 * ``static/js/favourites_handlers.js``
 
-
 Requirement 3: Show a personalised home screen
 ----------------------------------------------
 
@@ -313,7 +308,6 @@ Main code:
 * ``routes/favourites_routes.py``
 * ``templates/pages/home_page.html``
 * ``static/js/home_page_handlers.js``
-
 
 Requirement 4: Show live matches fixtures and results
 -----------------------------------------------------
@@ -340,7 +334,6 @@ Main code:
 * ``templates/pages/results_page.html``
 * ``static/js/match_page_handlers.js``
 
-
 Requirement 5: Show league standings
 ------------------------------------
 
@@ -362,7 +355,6 @@ Main code:
 * ``services/football_api_client.py``
 * ``templates/pages/leagues_page.html``
 * ``static/js/league_search_handlers.js``
-
 
 Requirement 6: Show team and player statistics
 ----------------------------------------------
@@ -389,7 +381,6 @@ Main code:
 * ``templates/pages/home_page.html``
 * ``templates/pages/compare_page.html``
 * ``static/js/comparison_handlers.js``
-
 
 Requirement 7: Search and compare football data
 -----------------------------------------------
@@ -418,7 +409,6 @@ Main code:
 * ``static/js/comparison_handlers.js``
 * ``static/js/league_search_handlers.js``
 
-
 Requirement 8: Manage profile and notification settings
 -------------------------------------------------------
 
@@ -444,7 +434,6 @@ Main code:
 * ``templates/pages/settings_page.html``
 * ``static/js/profile_handlers.js``
 * ``static/js/notification_handlers.js``
-
 
 Architecture and data flow
 --------------------------
@@ -506,7 +495,6 @@ The biggest connection points in the system are:
 
   * centralizes DB access through pooled connections and ``DBContext``
 
-
 Code map
 --------
 
@@ -523,7 +511,6 @@ Key responsibilities:
 * serve the main dashboard shell
 * define basic HTTP error handlers
 
-
 Configuration - ``config.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -533,7 +520,6 @@ Key responsibilities:
 * store database config
 * store session/cookie config
 * store the active football API base URL, key, timeout, and season
-
 
 Database layer - ``db/connection.py``, ``db/schema.sql``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -552,7 +538,6 @@ Database layer - ``db/connection.py``, ``db/schema.sql``
 * stores favourites
 * stores notification settings
 
-
 Authentication - ``routes/authentication_routes.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -569,7 +554,6 @@ Connected frontend:
 
 * ``templates/pages/login_page.html``
 * ``static/js/auth_handlers.js``
-
 
 Home and favourites - ``routes/favourites_routes.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -591,7 +575,6 @@ Connected frontend:
 * ``static/js/home_page_handlers.js``
 * ``static/js/favourites_handlers.js``
 
-
 Match data - ``routes/match_routes.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -609,7 +592,6 @@ Connected frontend:
 * ``templates/pages/fixtures_page.html``
 * ``templates/pages/results_page.html``
 * ``static/js/match_page_handlers.js``
-
 
 Standings and statistics - ``routes/statistics_routes.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -631,7 +613,6 @@ Connected frontend:
 * ``static/js/comparison_handlers.js``
 * ``static/js/league_search_handlers.js``
 
-
 Search and resolution - ``routes/lookup_routes.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -648,7 +629,6 @@ Key responsibilities:
 Why it matters:
 
 * this file is one of the most important pieces in the app because many UI features depend on turning free text into IDs safely
-
 
 Profile and notifications - ``routes/profile_routes.py``, ``routes/notification_routes.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -671,7 +651,6 @@ Connected frontend:
 * ``static/js/profile_handlers.js``
 * ``static/js/notification_handlers.js``
 
-
 External football API integration - ``services/football_api_client.py``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -692,7 +671,6 @@ Why it matters:
 * this is the main boundary between PrimeScore and the external football API
 * many routes stay simpler because this file centralizes common API behaviour
 
-
 Layout and page shell - ``templates/base_layout.html``, ``templates/dashboard_page.html``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -706,7 +684,6 @@ Layout and page shell - ``templates/base_layout.html``, ``templates/dashboard_pa
 * includes all page sections into one shell
 * login, home, live, fixtures, results, leagues, compare, favourites, settings, and profile are all mounted here
 
-
 Shared partials - ``templates/partials/``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -718,7 +695,6 @@ Important files:
 * ``app_scripts.html``
 
 These partials keep shared UI structure out of individual page fragments.
-
 
 Page sections - ``templates/pages/``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -737,7 +713,6 @@ Important files:
 * ``profile_page.html``
 
 Each file represents a feature area rendered inside the main dashboard layout.
-
 
 Frontend scripts - ``static/js/``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -796,6 +771,10 @@ Important files:
 
   * starts the client-side app
 
+Testing
+-------
+
+Manual testing was carried out for the main user flows.
 
 Common problems
 ---------------
@@ -805,7 +784,6 @@ Common problems
 
 PostgreSQL command-line tools are not in your PATH.
 
-
 PowerShell does not accept ``export``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -814,7 +792,6 @@ Use:
 .. code-block:: powershell
 
    $env:FOOTBALL_API_KEY="YOUR_KEY"
-
 
 The app starts but football data is missing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -826,7 +803,6 @@ Check:
 * the free API plan has not rate-limited you
 * the daily request quota has not been exhausted
 
-
 The app opens but the browser shows stale UI behaviour
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -836,12 +812,10 @@ Hard refresh:
 
    Ctrl + F5
 
-
 Fixtures or current-season data look empty
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This can be caused by API-Football plan limits rather than by local code errors. Some routes depend on the seasons and query types allowed by the current plan.
-
 
 Note
 ----
