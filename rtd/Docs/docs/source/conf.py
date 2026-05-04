@@ -1,6 +1,6 @@
 project = 'PrimeScore'
-copyright = '2026, PrimeScore Development Team'
-author = 'PrimeScore Development Team'
+copyright = '2026, Team 7a'
+author = 'Team 7a'
 
 release = '1.0'
 version = '1.0.0'
