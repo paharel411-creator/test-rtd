@@ -1,22 +1,35 @@
-import os
-import sys
+# Configuration file for the Sphinx documentation builder.
 
+# -- Project information
 
-sys.path.insert(0, os.path.abspath(".."))
+project = 'PrimeScore'
+copyright = '2026, team 7a'
+author = '7a team'
 
-project = "PrimeScore"
-copyright = "2026, Group 7A"
-author = "Group 7A"
-release = "latest"
+release = '0.1'
+version = '0.1.0'
+
+# -- General configuration
 
 extensions = [
-    "sphinx.ext.napoleon",
-    "sphinx.ext.viewcode",
+    'sphinx.ext.duration',
+    'sphinx.ext.doctest',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.autosummary',
+    'sphinx.ext.intersphinx',
 ]
 
-templates_path = ["_templates"]
-exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+intersphinx_mapping = {
+    'python': ('https://docs.python.org/3/', None),
+    'sphinx': ('https://www.sphinx-doc.org/en/master/', None),
+}
+intersphinx_disabled_domains = ['std']
 
-html_theme = "sphinx_rtd_theme"
-html_static_path = ["_static"]
-html_title = "PrimeScore documentation"
+templates_path = ['_templates']
+
+# -- Options for HTML output
+
+html_theme = 'sphinx_rtd_theme'
+
+# -- Options for EPUB output
+epub_show_urls = 'footnote'
