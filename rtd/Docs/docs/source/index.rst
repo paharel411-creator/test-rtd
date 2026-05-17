@@ -732,8 +732,37 @@ Important files:
   * starts the client-side app
 
 
+
 Testing
 -------
+
+Testing style
+~~~~~~~~~~~~~
+
+The test suite mixes different types of backend tests. It includes unit-style tests for helper logic, formatting, API fallback logic, and database context-manager behaviour.
+
+It also includes integration-style backend tests using the Flask test client. These tests check route behaviour, mocked API and database responses, session handling, persistence flows, and cache reuse for the home screen and statistics routes.
+
+Run the tests
+~~~~~~~~~~~~~
+
+Install the test dependencies:
+
+.. code-block:: powershell
+
+   pip install -r requirements-test.txt
+
+Run all tests:
+
+.. code-block:: powershell
+
+   python -m pytest -v
+
+Run coverage:
+
+.. code-block:: powershell
+
+   python -m pytest --cov=. --cov-report=term-missing
 
 
 Common problems
